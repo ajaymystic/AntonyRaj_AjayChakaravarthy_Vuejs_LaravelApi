@@ -5,6 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Genre
+ *
+ * Represents a video game genre in the database.
+ * A genre can be associated with many video games.
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ *
+ * @package App\Models
+ */
+
 class Genre extends Model
 {
     use HasFactory;
@@ -20,4 +33,8 @@ class Genre extends Model
     {
         return $this->hasMany(VideoGame::class);
     }
+
+    
 }
+
+
