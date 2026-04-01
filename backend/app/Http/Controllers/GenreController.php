@@ -6,6 +6,15 @@ use App\Models\Genre;
 use App\Http\Resources\GenreResource;
 use Illuminate\Http\Request;
 
+/**
+ * Class GenreController
+ *
+ * Handles all REST API endpoints for the Genre resource.
+ * Supports listing, creating, reading, updating, and deleting genres.
+ *
+ * @package App\Http\Controllers
+ */
+
 class GenreController extends Controller
 {
     public function index()
