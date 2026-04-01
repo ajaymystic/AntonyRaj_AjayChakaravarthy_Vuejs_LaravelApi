@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class VideoGame extends Model
+{
+    use HasFactory;
+
+     protected $fillable = [
+        'title',
+        'description',
+        'platform',
+        'release_year',
+        'rating',
+        'genre_id',
+    ];
+
+    //this is to define the relationship between video game and genre.
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+}
