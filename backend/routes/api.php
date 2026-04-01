@@ -16,6 +16,12 @@ use App\Http\Controllers\VideoGameController;
 |
 */
 //Genre Routes- 5 rest endpoints for genres
+/**
+ * Genre Routes
+ *
+ * I'm registering all five REST endpoints for genres
+ * and mapping each one to the correct controller method.
+ */
 Route::get('/genres', [GenreController::class, 'index']);
 Route::post('/genres', [GenreController::class, 'store']);
 Route::get('/genres/{id}', [GenreController::class, 'show']);
@@ -23,6 +29,15 @@ Route::patch('/genres/{id}', [GenreController::class, 'update']);
 Route::delete('/genres/{id}', [GenreController::class, 'destroy']);
 
 //Video Game Routes- 5 rest endpoints for video games
+/**
+ * Video Game Routes
+ *
+ * I'm registering all five REST endpoints for video games.
+ * The index route supports three filters:
+ * - ?search=    searches title and description
+ * - ?genre_id=  filters by genre
+ * - ?platform=  filters by platform
+ */
 Route::get('/video-games', [VideoGameController::class, 'index']);
 Route::post('/video-games', [VideoGameController::class, 'store']);
 Route::get('/video-games/{id}', [VideoGameController::class, 'show']);
