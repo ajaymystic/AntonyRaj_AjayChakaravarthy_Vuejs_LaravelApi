@@ -6,8 +6,32 @@ use App\Models\VideoGame;
 use App\Http\Resources\VideoGameResource;
 use Illuminate\Http\Request;
 
+/****
+ * Class VideoGameController
+ *
+ * Handles all REST API endpoints for the VideoGame resource.
+ * Supports listing, creating, reading, updating, and deleting video games.
+ *
+ * @package App\Http\Controllers
+ */
+
 class VideoGameController extends Controller
 {
+    /**
+     * Display a listing of video games with optional filters.
+     *
+     * Supports the following query parameters:
+     * - ?search=keyword  searches title and description fields
+     * - ?genre_id=1      filters results by genre
+     * - ?platform=PS5    filters results by platform
+     *
+     * Multiple filters can be combined in a single request.
+     * Example: /api/video-games?platform=PS5&genre_id=1
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    
     public function index(Request $request)
     {
         // Starting with a query builder so I can chain filters conditionally
