@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVault-Retro API Browser</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/grid.css" rel="stylesheet">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+    </script>
+    <script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+    <nav id="main-nav">
+        <div class="nav-inner">
+            <span class="nav-logo">&#9654; GV</span>
+            <button id="burger-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="#app-header" class="nav-link">HOME</a></li>
+                <li><a href="#games-section" class="nav-link">GAMES</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="app-header">
+        <h1 class="site-title" id="header-title">&#9654; GAME VAULT &#9664;</h1>
+        <p class="site-subtitle">|/-\| RETRO API BROWSER |/-\|</p>
+    </header>
+
+    <div id="app">
+
+        <div class="controls" id="controls-bar">
+            <input
+                class="search-input"
+                type="text"
+                placeholder="SEARCH GAMES..."
+                v-model="searchQuery"
+                @keyup.enter="fetchGames"
+            >
+            <select class="genre-select" v-model="selectedGenreId" @change="fetchGames">
+                <option value="">ALL GENRES</option>
+                <option v-for="genre in genres" :key="genre.id" :value="genre.id">
+                    {{ genre.name.toUpperCase() }}
+                </option>
+            </select>
+            <button class="search-btn" @click="fetchGames">SEARCH</button>
+        </div>
+
+        <div class="layout">
+
+            <div class="games-section" id="games-section">
+                <div v-if="loading" class="status-box">
+                    <p class="status-label loading-label">LOADING GAMES...</p>
+                </div>
+                <div v-else-if="error" class="status-box">
+                    <p class="status-label error-label">{{ error }}</p>
+                </div>
+                <div v-else-if="games.length === 0" class="status-box">
+                    <p class="status-label empty-label">NO GAMES FOUND</p>
+                </div>
+                <div v-else>
+                    <p class="result-count">&#9656; {{ games.length }} GAME(S) FOUND</p>
+                    <div class="games-grid">
+                        <div
+                            class="game-card"
+                            v-for="game in games"
+                            :key="game.id"
+                            :class="{ active: selectedGame && selectedGame.id === game.id }"
+                            @click="selectGame(game.id)"
+                        >
+                            <div class="game-card-title">{{ game.title }}</div>
+                            <div class="game-card-platform">&#128223; {{ game.platform }}</div>
+                            <div class="game-card-genre" v-if="game.genre">&#9658; {{ game.genre.name }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <div v-if="detailLoading" class="status-box">
+                    <p class="status-label loading-label">FETCHING DATA...</p>
+                </div>
+                <div v-else-if="detailError" class="status-box">
+                    <p class="status-label error-label">{{ detailError }}</p>
+                </div>
+                <div class="detail-panel" v-else-if="selectedGame" ref="detailPanel">
+                    <div class="detail-panel-header">
+                        <div class="detail-title">{{ selectedGame.title }}</div>
+                        <button class="close-btn" @click="closeDetail">&#10005; CLOSE</button>
+                    </div>
+                    <div class="pixel-divider"></div>
+                    <div class="detail-row" v-if="selectedGame.platform">
+                        <span class="detail-label">PLATFORM</span>
+                        <span class="detail-value">{{ selectedGame.platform }}</span>
+                    </div>
+                    <div class="detail-img-wrap" v-if="getGameImage(selectedGame.title)">
+                            <img :src="getGameImage(selectedGame.title)" :alt="selectedGame.title" class="detail-img">
+                        </div>
+                    <div class="detail-row" v-if="selectedGame.release_year">
+                        <span class="detail-label">YEAR</span>
+                        <span class="detail-value">{{ selectedGame.release_year }}</span>
+                    </div>
+                    <div class="detail-row" v-if="selectedGame.genre">
+                        <span class="detail-label">GENRE</span>
+                        <span class="detail-value">{{ selectedGame.genre.name }}</span>
+                    </div>
+                    <div class="detail-description" v-if="selectedGame.description">
+                        {{ selectedGame.description }}
+                    </div>
+                </div>
+                <div v-else class="status-box">
+                    <p class="status-label hint-label">SELECT A GAME<br><br>TO VIEW DETAILS</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
