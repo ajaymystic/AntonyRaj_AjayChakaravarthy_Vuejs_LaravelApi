@@ -9,6 +9,8 @@ genre and platform, and click any game to view its full details and cover image.
 **Semester:** Winter Semester 4
 
 ---
+![Image of game controller](./frontend/images/image.jpg)
+---
 
 ## Project Structure
 
@@ -125,7 +127,8 @@ Leave this running. It will auto-recompile on every save.
 Since the frontend is inside XAMPP's `htdocs`, open it directly at:
 
 ```
-http://localhost/HW3-Assignment/frontend/index.html
+Open frontend/index.html using a local server such as VS Code Live Server,
+or place the project inside your htdocs folder and visit it via XAMPP.
 ```
 
 > Make sure both **Apache** (XAMPP) and **php artisan serve** (backend) are running at the same time.
