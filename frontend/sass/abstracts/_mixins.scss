@@ -1,0 +1,21 @@
+@use 'variables' as v;
+
+@mixin flex-between {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+@mixin pixel-border($color) {
+    border: 2px solid $color;
+}
+
+@mixin glow($color) {
+    box-shadow: 0 0 8px $color, 0 0 20px rgba($color, 0.3);
+}
+
+@mixin responsive-md {
+    @media screen and (min-width: 768px) {
+        @content;
+    }
+}

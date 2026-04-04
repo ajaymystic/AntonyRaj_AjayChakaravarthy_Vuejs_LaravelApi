@@ -1,0 +1,45 @@
+@use '../abstracts' as a;
+
+#app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+}
+
+#app-header {
+    text-align: center;
+    padding: 40px 0 28px;
+    border-bottom: 3px solid a.$border;
+    margin-bottom: 20px;
+}
+
+.site-title {
+    font-family: a.$font-pixel;
+    font-size: clamp(14px, 4vw, 30px);
+    color: a.$border;
+    text-shadow: 0 0 8px a.$border, 0 0 20px rgba(a.$border, 0.3);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+        color: a.$accent;
+    }
+}
+
+.site-subtitle {
+    color: a.$accent;
+    font-size: 22px;
+    letter-spacing: 3px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    @include a.responsive-md {
+        grid-template-columns: 1fr 360px;
+    }
+}

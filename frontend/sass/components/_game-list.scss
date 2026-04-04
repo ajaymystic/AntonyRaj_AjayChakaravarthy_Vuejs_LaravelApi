@@ -1,0 +1,75 @@
+@use '../abstracts' as a;
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+}
+
+.game-card {
+    background: a.$card-bg;
+    @include a.pixel-border(a.$muted);
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        border-color: a.$border;
+        @include a.glow(a.$border);
+    }
+
+    &.active {
+        border-color: a.$accent;
+        @include a.glow(a.$accent);
+    }
+}
+
+.game-card-title {
+    font-family: a.$font-pixel;
+    font-size: 8px;
+    color: a.$border;
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+.game-card-platform {
+    color: a.$accent;
+    font-size: 17px;
+}
+
+.game-card-genre {
+    color: a.$muted;
+    font-size: 16px;
+    margin-top: 4px;
+}
+
+.result-count {
+    color: a.$muted;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.status-box {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.status-label {
+    font-family: a.$font-pixel;
+    font-size: 9px;
+    line-height: 2;
+}
+
+.loading-label {
+    color: a.$border;
+    animation: blink 1s step-start infinite;
+}
+
+.error-label { color: a.$danger; }
+.empty-label  { color: a.$muted;  }
+.hint-label   { color: a.$muted;  }
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}

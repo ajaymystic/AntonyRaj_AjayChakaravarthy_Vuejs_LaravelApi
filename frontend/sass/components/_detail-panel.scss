@@ -1,0 +1,103 @@
+@use '../abstracts' as a;
+
+.detail-panel {
+    background: a.$card-bg;
+    @include a.pixel-border(a.$accent);
+    @include a.glow(a.$accent);
+    padding: 22px;
+    position: sticky;
+    top: 20px;
+}
+
+.detail-panel-header {
+    @include a.flex-between;
+    margin-bottom: 14px;
+}
+
+.detail-title {
+    font-family: a.$font-pixel;
+    font-size: 9px;
+    color: a.$border;
+    line-height: 1.9;
+    flex: 1;
+    padding-right: 10px;
+}
+
+.close-btn {
+    background: transparent;
+    @include a.pixel-border(a.$danger);
+    color: a.$danger;
+    font-family: a.$font-pixel;
+    font-size: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s;
+
+    &:hover {
+        background: a.$danger;
+        color: #fff;
+    }
+}
+
+.pixel-divider {
+    height: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        a.$accent 0px,
+        a.$accent 6px,
+        transparent 6px,
+        transparent 12px
+    );
+    margin: 12px 0;
+}
+
+.detail-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: baseline;
+}
+
+.detail-label {
+    color: a.$accent;
+    font-size: 18px;
+    min-width: 90px;
+    flex-shrink: 0;
+}
+
+.detail-value {
+    color: a.$text;
+    font-size: 18px;
+}
+
+.detail-description {
+    margin-top: 14px;
+    color: a.$muted;
+    font-size: 18px;
+    line-height: 1.5;
+    border-top: 1px solid a.$muted;
+    padding-top: 12px;
+}
+
+.detail-img-wrap {
+    margin-bottom: 16px;
+    border: 2px solid a.$border;
+    overflow: hidden;
+}
+
+.detail-img {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
+    display: block;
+    background: #000;
+    filter: saturate(0.85) contrast(1.05);
+    transition: filter 0.3s;
+
+    &:hover {
+        filter: saturate(1.1) contrast(1.1);
+    }
+}

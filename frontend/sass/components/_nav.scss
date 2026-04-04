@@ -1,0 +1,120 @@
+@use '../abstracts' as a;
+
+#main-nav {
+    background: a.$card-bg;
+    border-bottom: 2px solid a.$border;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 54px;
+}
+
+.nav-logo {
+    font-family: a.$font-pixel;
+    font-size: 10px;
+    color: a.$border;
+    text-shadow: 0 0 8px a.$border;
+    letter-spacing: 2px;
+}
+
+
+#nav-menu {
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    background: a.$card-bg;
+    border: 2px solid a.$border;
+    position: absolute;
+    top: 54px;
+    right: 0;
+    width: 200px;
+    padding: 10px 0;
+
+    &.open {
+        display: flex;
+    }
+
+    li a {
+        display: block;
+        padding: 12px 20px;
+        font-family: a.$font-pixel;
+        font-size: 9px;
+        color: a.$text;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition: color 0.2s, background 0.2s;
+
+        &:hover {
+            color: a.$border;
+            background: rgba(a.$border, 0.08);
+        }
+    }
+}
+
+#burger-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px;
+
+    span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: a.$border;
+        transition: transform 0.3s, opacity 0.3s;
+    }
+
+    
+    &.expanded span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    &.expanded span:nth-child(2) {
+        opacity: 0;
+    }
+
+    &.expanded span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
+
+
+@include a.responsive-md {
+    #burger-btn {
+        display: none;
+    }
+
+    #nav-menu {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        border: none;
+        background: transparent;
+        padding: 0;
+        gap: 6px;
+
+        li a {
+            padding: 8px 14px;
+            border: 2px solid transparent;
+
+            &:hover {
+                border-color: a.$border;
+                background: transparent;
+            }
+        }
+    }
+}
